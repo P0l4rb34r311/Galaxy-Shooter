@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     private GameObject _laserPrefab;
     [SerializeField]
     private GameObject _tripleShotPrefab;
+    [SerializeField]
+    private GameObject _shieldVisualizer;
     private SpawnManager _spawnManager;
 
 
@@ -129,6 +131,7 @@ public class Player : MonoBehaviour
     public void ShieldsActive()
     {
         _isShieldsActive = true;
+        _shieldVisualizer.SetActive(true);
     }
 
 }
