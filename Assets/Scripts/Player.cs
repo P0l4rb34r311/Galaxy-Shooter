@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     private float _fireRate = 0.5f;
     private float _canFire = -1f;
     [SerializeField]
+    private int _score;
+    [SerializeField]
     private int _lives = 3;
     private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
@@ -134,4 +136,8 @@ public class Player : MonoBehaviour
         _shieldVisualizer.SetActive(true);
     }
 
+    public void AddScore()
+    {
+        _score += 10;
+    }
 }
