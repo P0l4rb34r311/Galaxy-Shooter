@@ -117,8 +117,8 @@ public class Player : MonoBehaviour
         while(_isSpeedBoostActive == true)
         {
             yield return new WaitForSeconds(4f);
+            _speed /= _speedMultiplyer;
             _isSpeedBoostActive = false;
-
         }
     }
 }
