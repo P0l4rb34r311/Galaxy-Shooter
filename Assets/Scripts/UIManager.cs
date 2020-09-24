@@ -7,15 +7,25 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField]
     private Text _scoreText;
+    [SerializeField]
+    private Image _livesImg;
+    [SerializeField]
+    private Sprite[] _liveSprites;
+
     void Start()
     {
         Player player = GameObject.Find("Player").GetComponent<Player>();
-        _scoreText.text = "Score : " + 50;
+        _scoreText.text = "Score : " + 0;
     }
 
     // Update is called once per frame
-    void Update()
+    public void UpdateScore(int playerScore)
     {
-        
+        _scoreText.text = "Score: " + playerScore.ToString();
+    }
+
+    public void UpdateLives(int currentLives)
+    {
+        _livesImg.sprite = _liveSprites[currentLives];
     }
 }
