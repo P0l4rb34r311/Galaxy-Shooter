@@ -1,16 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 4f;
     private Player _player;
+    private Animator _animator;
 
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
+        _animator = gameObject.GetComponent<Animator>();
+
+        if(_player == null)
+        {
+            Debug.LogError("Player is NULL");
+        }
+        if(_animator == null)
+        {
+            Debug.LogError("Animator is NULL");
+        }
     }
 
 
@@ -35,7 +47,11 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
-            Destroy(this.gameObject);
+            _speed = 0;
+            _animator.SetTrigger("OnEnemyDeath");
+
+            Destroy(GetComponent<Collider2D>());
+            Destroy(this.gameObject, 2.9f);
         }
         if (other.tag == "Laser")
         {
@@ -44,7 +60,11 @@ public class Enemy : MonoBehaviour
             {
                 _player.AddScore(10);
             }
-            Destroy(this.gameObject);
+            _speed = 0;
+            _animator.SetTrigger("OnEnemyDeath");
+
+            Destroy(GetComponent<Collider2D>());
+            Destroy(this.gameObject, 2.9f);
         }
     }
 }
