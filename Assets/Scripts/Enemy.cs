@@ -10,8 +10,9 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        Player player = GameObject.Find("Player").GetComponent<Player>();
+        _player = GameObject.Find("Player").GetComponent<Player>();
     }
+
 
     void Update()
     {
