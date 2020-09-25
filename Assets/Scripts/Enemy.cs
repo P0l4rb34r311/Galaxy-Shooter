@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
-        if (transform.position.y < -5.5f)
+        if (transform.position.y < -15f)
         {
             float _randomX = Random.Range(-9.5f, 9.5f);
             transform.position = new Vector3(_randomX, 8, 0);
@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
-            _speed = 0;
+            //_speed = 0;
             _animator.SetTrigger("OnEnemyDeath");
 
             Destroy(GetComponent<Collider2D>());
@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
             {
                 _player.AddScore(10);
             }
-            _speed = 0;
+            //_speed = 0;
             _animator.SetTrigger("OnEnemyDeath");
 
             Destroy(GetComponent<Collider2D>());

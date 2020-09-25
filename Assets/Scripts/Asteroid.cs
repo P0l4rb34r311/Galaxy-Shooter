@@ -6,15 +6,12 @@ public class Asteroid : MonoBehaviour
 {
     [SerializeField]
     private float _rotateSpeed = 3.0f;
-    private Animator _animator;
+    [SerializeField]
+    private GameObject _explosion;
 
     void Start()
     {
-        _animator = gameObject.GetComponent<Animator>();   
-        if(_animator == null)
-        {
-            Debug.LogError("Animator is NULL");
-        }
+        
     }
 
 
@@ -27,9 +24,9 @@ public class Asteroid : MonoBehaviour
         if(other.tag == "Laser")
         {
             Destroy(other.gameObject);
-            _animator.SetTrigger("Explosion");
+            Instantiate(_explosion, transform.position, Quaternion.identity);
             Destroy(GetComponent<Collider2D>());
-            Destroy(this.gameObject, 3.0f);
+            Destroy(this.gameObject);
         }
     }
 }
