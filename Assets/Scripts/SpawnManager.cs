@@ -19,12 +19,6 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerupRoutine());
     }
-
-    void Update()
-    {
-        
-    }
-
     IEnumerator SpawnEnemyRoutine()
     {
         while(_stopSpawning == false)
@@ -33,7 +27,7 @@ public class SpawnManager : MonoBehaviour
             GameObject newEnemy  = Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
             newEnemy.transform.parent = _enemyContainer.transform;
 
-            yield return new WaitForSeconds(2.0f);            
+            yield return new WaitForSeconds(2.3f);            
         }
     }
     IEnumerator SpawnPowerupRoutine()

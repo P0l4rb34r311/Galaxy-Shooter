@@ -26,7 +26,7 @@ public class Asteroid : MonoBehaviour
             Destroy(other.gameObject);
             Instantiate(_explosion, transform.position, Quaternion.identity);
             Destroy(GetComponent<Collider2D>());
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, 0.5f);
         }
     }
 }
