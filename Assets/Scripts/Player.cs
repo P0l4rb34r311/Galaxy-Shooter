@@ -25,6 +25,10 @@ public class Player : MonoBehaviour
     private GameObject _tripleShotPrefab;
     [SerializeField]
     private GameObject _shieldVisualizer;
+    [SerializeField]
+    private GameObject _rightWingDamage;
+    [SerializeField]
+    private GameObject _leftWingDamage;
     private SpawnManager _spawnManager;
     private UIManager _uIManager;
 
@@ -98,6 +102,15 @@ public class Player : MonoBehaviour
             return;
         }
         _lives --;
+
+        if(_lives == 2)
+        {
+            _rightWingDamage.SetActive(true);
+        }
+        else if(_lives == 1)
+        {
+            _leftWingDamage.SetActive(true);
+        }
 
         _uIManager.UpdateLives(_lives);
 
