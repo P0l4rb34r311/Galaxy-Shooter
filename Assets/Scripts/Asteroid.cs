@@ -10,23 +10,20 @@ public class Asteroid : MonoBehaviour
     private float _rotateSpeed = 3.0f;
     [SerializeField]
     private GameObject _explosion;
-
+    private SpawnManager _spawnManager;
 
     void Start()
     {
-        transform.position = new Vector3(0, 8, 0);
+        transform.position = new Vector3(0, 5, 0);
+        _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
     }
 
 
     void Update()
     { 
-        transform.Rotate(Vector3.forward * _rotateSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.forward * _rotateSpeed * Time.deltaTime, Space.Self);
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, 0, 0), transform.position.y, 0);
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
-        if (transform.position.y < -6f)
-        {
-            transform.position = new Vector3(0, 8, 0);
-        }
         // Code added to start  asteroid off screen and loop through on a fixed y axis til the player shoots it.
         // gives the appearance of the asteriod moving
     }
@@ -38,6 +35,8 @@ public class Asteroid : MonoBehaviour
             Instantiate(_explosion, transform.position, Quaternion.identity);
             Destroy(GetComponent<Collider2D>());
             Destroy(this.gameObject, 0.25f);
+            _spawnManager.StartSpawning();
+            
         }
     }
     
