@@ -25,7 +25,6 @@ public class Asteroid : MonoBehaviour
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, 0, 0), transform.position.y, 0);
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
         // Code added to start  asteroid off screen and loop through on a fixed y axis til the player shoots it.
-        // gives the appearance of the asteriod moving
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -33,10 +32,10 @@ public class Asteroid : MonoBehaviour
         {
             Destroy(other.gameObject);
             Instantiate(_explosion, transform.position, Quaternion.identity);
-            Destroy(GetComponent<Collider2D>());
+            Destroy(GetComponent<Collider2D>()); 
             Destroy(this.gameObject, 0.25f);
             _spawnManager.StartSpawning();
-            
+           
         }
     }
     
