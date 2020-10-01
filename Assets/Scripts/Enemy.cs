@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     private Player _player;
     private Animator _animator;
     private AudioSource _audioSource;
+    [SerializeField]
+    private GameObject _laserPrefab;
 
     void Start()
     {
@@ -33,6 +35,11 @@ public class Enemy : MonoBehaviour
 
 
     void Update()
+    {
+        CalculateMovement();
+    }
+
+    void CalculateMovement()
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
