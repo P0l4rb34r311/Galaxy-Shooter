@@ -7,18 +7,19 @@ public class Laser : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 8.0f;
-    private bool _isEnemyLaser = false;
+    //private bool _isEnemyLaser = false;
 
     void Update()
     {       
-        if(_isEnemyLaser == false)
-        {
+        //if(_isEnemyLaser == false)
+        //{
             MoveUp();
-        }
-        else
-        {
-            MoveDown();
-        }
+        //}
+        //else
+        //{
+            //MoveDown();
+            //Debug.Log("Enemy laser detected");
+        //}
     }
 
     void MoveUp()
@@ -34,26 +35,27 @@ public class Laser : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
+        Debug.Log("Player laser called");
     }
 
-    void MoveDown()
-    {
-        transform.Translate(Vector3.down * _speed * Time.deltaTime);
+    //void MoveDown()
+    //{
+        //transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
 
-        if (transform.position.y < -7f)
-        {
-            if (transform.parent != null)
-            {
-                Destroy(transform.parent.gameObject);
-            }
-            Destroy(this.gameObject);
-        }
-    }
+        //if (transform.position.y < -7f)
+        //{
+            //if (transform.parent != null)
+            //{
+                //Destroy(transform.parent.gameObject);
+            //}
+            //Destroy(this.gameObject);
+        //}
+    //}
 
-    public void AssignEnemyLaser()
-    {
-        _isEnemyLaser = true;
-    }
+    //public void AssignEnemyLaser()
+    //{
+        //_isEnemyLaser = true;
+    //}
    
 }
