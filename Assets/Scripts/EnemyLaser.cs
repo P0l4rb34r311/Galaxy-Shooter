@@ -24,13 +24,25 @@ public class EnemyLaser : MonoBehaviour
                 Destroy(transform.parent.gameObject);
             }
             Destroy(this.gameObject);
-        }        
+        }
 
     }
 
     public void AssignEnemyLaser()
     {
-        _isEnemyLaser = true;        
-        Debug.Log("Enemy laser detected");
+        _isEnemyLaser = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            Player player = other.GetComponent<Player>();
+            if (player != null)
+            {
+                player.Damage();
+            }
+            Destroy(this.gameObject);
+        }
     }
 }
