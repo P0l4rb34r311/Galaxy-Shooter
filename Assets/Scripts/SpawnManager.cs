@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    //private IEnumerator Coroutine;
     [SerializeField]
     private GameObject _enemyPrefab;
     [SerializeField]

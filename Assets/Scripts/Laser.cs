@@ -26,6 +26,5 @@ public class Laser : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
-        Debug.Log("Player laser called");
     }
 }

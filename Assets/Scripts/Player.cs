@@ -9,14 +9,15 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 3.5f; 
-    private float _speedMultiplyer = 2;
+    private float _speedMultiplyer = 2f;
     [SerializeField]
     private float _fireRate = 0.5f;
     private float _canFire = -1f;
     [SerializeField]
     private int _score = 0;
     [SerializeField]
-    private int _lives = 3;
+    private float _lives = 3f;
+    
     private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
     private bool _isShieldsActive = false;
@@ -105,28 +106,29 @@ public class Player : MonoBehaviour
         _audioSource.Play();
     }
 
-    public void Damage()
+    public void Damage(float damage)
     {
+        int _livesInt = (int)_lives;
         if(_isShieldsActive == true)
         {
             _isShieldsActive = false;
             _shieldVisualizer.SetActive(false);
             return;
         }
-        _lives --;
-
-        if(_lives == 2)
+        _lives -= damage;
+        
+        if(_livesInt == 2)
         {
             _rightWingDamage.SetActive(true);
         }
-        else if(_lives == 1)
+        else if(_livesInt == 1)
         {
             _leftWingDamage.SetActive(true);
         }
 
-        _uIManager.UpdateLives(_lives);
+        _uIManager.UpdateLives(_livesInt);
 
-        if(_lives < 1)
+        if(_livesInt < 1)
         {
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);

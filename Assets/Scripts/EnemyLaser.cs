@@ -40,7 +40,7 @@ public class EnemyLaser : MonoBehaviour
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-                player.Damage();
+                player.Damage(0.5f);
             }
             Destroy(this.gameObject);
         }
