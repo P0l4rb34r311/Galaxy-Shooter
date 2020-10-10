@@ -10,7 +10,7 @@ public class Powerup : MonoBehaviour
     [SerializeField] // 0 = TripleShot, 1 = Speed, 2 = Shield 
     private int _powerupID;
     [SerializeField]
-    private AudioClip _clip;
+    private GameObject _sound;
 
     void Update()
     {
@@ -28,7 +28,7 @@ public class Powerup : MonoBehaviour
         if(other.tag == "Player")
         {
             Player player = other.transform.GetComponent<Player>();
-            AudioSource.PlayClipAtPoint(_clip, transform.position);
+            Instantiate(_sound, transform.position, Quaternion.identity);
             if(player != null)
             {
                 
@@ -50,7 +50,6 @@ public class Powerup : MonoBehaviour
                 }
                 
             }
-
             Destroy(this.gameObject);
         }
     }

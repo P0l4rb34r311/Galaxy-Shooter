@@ -9,15 +9,6 @@ public class EnemyLaser : MonoBehaviour
     [SerializeField]
     private GameObject _explosionSound;
 
-    private void Start()
-    {
-        //_audioSource = GameObject.Find("Explosion_Sound").GetComponent<AudioSource>();
-        //if (_audioSource == null)
-        //{
-        //    Debug.LogError("Audio Source for Enemy Laser Impact is NULL");
-        //}
-    }
-
     void Update()
     {
         MoveDown();

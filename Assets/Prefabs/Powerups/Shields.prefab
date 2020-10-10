@@ -119,7 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _powerupID: 2
-  _clip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
+  _sound: {fileID: 4904136043723359087, guid: 74da7908ce44c584d8810fbc2e401012, type: 3}
 --- !u!61 &2450057663818187797
 BoxCollider2D:
   m_ObjectHideFlags: 0
