@@ -108,15 +108,14 @@ public class Player : MonoBehaviour
 
     public void Damage(float damage)
     {
+        _lives -= damage;
         int _livesInt = (int)_lives;
         if(_isShieldsActive == true)
         {
             _isShieldsActive = false;
             _shieldVisualizer.SetActive(false);
             return;
-        }
-        _lives -= damage;
-        
+        }             
         if(_livesInt == 2)
         {
             _rightWingDamage.SetActive(true);
