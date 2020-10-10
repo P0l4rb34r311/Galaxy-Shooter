@@ -94,9 +94,5 @@ public class Enemy : MonoBehaviour
             Destroy(GetComponent<Collider2D>());
             Destroy(this.gameObject, 2.9f);
         }
-        //if (other.tag == "Enemy Laser")
-        //{
-            //return;
-        //}
     }
 }
