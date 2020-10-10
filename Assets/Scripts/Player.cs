@@ -14,10 +14,9 @@ public class Player : MonoBehaviour
     private float _fireRate = 0.5f;
     private float _canFire = -1f;
     [SerializeField]
-    private int _score = 0;
-    [SerializeField]
     private float _lives = 3f;
-    
+    [SerializeField]
+    private int _score = 0;
     private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
     private bool _isShieldsActive = false;

@@ -6,6 +6,17 @@ public class EnemyLaser : MonoBehaviour
 {
     private float _speed = 8.0f;
     private bool _isEnemyLaser = false;
+    [SerializeField]
+    private GameObject _explosionSound;
+
+    private void Start()
+    {
+        //_audioSource = GameObject.Find("Explosion_Sound").GetComponent<AudioSource>();
+        //if (_audioSource == null)
+        //{
+        //    Debug.LogError("Audio Source for Enemy Laser Impact is NULL");
+        //}
+    }
 
     void Update()
     {
@@ -38,10 +49,12 @@ public class EnemyLaser : MonoBehaviour
         if (other.tag == "Player")
         {
             Player player = other.GetComponent<Player>();
+            Instantiate(_explosionSound, transform.position, Quaternion.identity);
             if (player != null)
             {
                 player.Damage(0.5f);
             }
+            Destroy(GetComponent<Collider2D>());
             Destroy(this.gameObject);
         }
     }

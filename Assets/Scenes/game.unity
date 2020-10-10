@@ -786,18 +786,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7854c88341cb2c944968316357dec0cd, type: 3}
-    m_FontSize: 50
-    m_FontStyle: 0
+    m_FontSize: 35
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 5
+    m_MinSize: 0
     m_MaxSize: 50
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Press 'R' to restart
+  m_Text: "Press 'R' to restart\nOr \n'esc' to quit"
 --- !u!222 &784797084
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -888,8 +888,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5.5
   _fireRate: 0.15
-  _score: 0
   _lives: 3
+  _score: 0
   _laserPrefab: {fileID: 8626209549141389993, guid: a5dd7658b16e4ad4d82fa9c62454197b, type: 3}
   _tripleShotPrefab: {fileID: 986596423859180080, guid: ffb830bcc482b004ab669950a6e814a6, type: 3}
   _shieldVisualizer: {fileID: 271988653}
