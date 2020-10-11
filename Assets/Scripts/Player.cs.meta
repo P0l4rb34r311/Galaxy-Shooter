@@ -4,8 +4,12 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - _laserPrefab: {fileID: 8626209549141389993, guid: a5dd7658b16e4ad4d82fa9c62454197b, type: 3}
+  - _laserPrefab: {fileID: 5323249529152539553, guid: a5dd7658b16e4ad4d82fa9c62454197b, type: 3}
   - _tripleShotPrefab: {fileID: 986596423859180080, guid: ffb830bcc482b004ab669950a6e814a6, type: 3}
+  - _shieldVisualizer: {instanceID: 0}
+  - _rightWingDamage: {instanceID: 0}
+  - _leftWingDamage: {instanceID: 0}
+  - _laserSound: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
