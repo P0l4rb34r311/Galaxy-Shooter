@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Sprite[] _liveSprites;
     private GameManager _gameManager;
+    [SerializeField]
+    private GameObject _pauseMenuPanel;
 
     void Start()
     {
@@ -62,5 +65,16 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
         }
 
+    }
+
+    public void ResumeGameButton()
+    {
+        Time.timeScale = 1;
+        _pauseMenuPanel.SetActive(false);
+    }
+
+    public void MainMenuButton()
+    {
+        SceneManager.LoadScene(0);
     }
 }
