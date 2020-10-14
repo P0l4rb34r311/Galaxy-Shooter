@@ -1034,7 +1034,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &825701438
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1257,8 +1257,8 @@ GameObject:
   - component: {fileID: 974663392}
   - component: {fileID: 974663391}
   - component: {fileID: 974663390}
-  - component: {fileID: 974663393}
   - component: {fileID: 974663394}
+  - component: {fileID: 974663393}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1357,8 +1357,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &974663393
-BoxCollider2D:
+--- !u!68 &974663393
+EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1370,19 +1370,32 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.02359724, y: 0.0044026375}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
-    newSize: {x: 5.12, y: 5.12}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3.2380543, y: 4.1875434}
+  m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
+  m_Points:
+  - {x: 0.53364843, y: 2.0323951}
+  - {x: -0.3704841, y: 2.0253594}
+  - {x: -0.5317954, y: 2.032395}
+  - {x: -0.6832044, y: 1.7729415}
+  - {x: -0.73364556, y: -0.08283174}
+  - {x: -0.81381106, y: -0.69675905}
+  - {x: -1.6179533, y: -1.3421817}
+  - {x: -1.6188502, y: -2.1269245}
+  - {x: -0.8624346, y: -1.4559559}
+  - {x: -0.8716859, y: -1.906647}
+  - {x: -0.04524529, y: -1.5987953}
+  - {x: 0.84595436, y: -1.8848726}
+  - {x: 0.83318245, y: -1.4679751}
+  - {x: 1.6115799, y: -2.0756328}
+  - {x: 1.5712503, y: -1.2184672}
+  - {x: 0.80034405, y: -0.6088574}
+  - {x: 0.70537937, y: 0.093443155}
+  - {x: 0.68451923, y: 1.7790418}
+  - {x: 0.5366235, y: 2.0311215}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!82 &974663394
 AudioSource:
   m_ObjectHideFlags: 0
