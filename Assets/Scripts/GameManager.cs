@@ -15,17 +15,22 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R) && _isGameOver == true)
         {
-            SceneManager.LoadScene(1); //Main Menu Scene
+            SceneManager.LoadScene(1); //Game start scene
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            SceneManager.LoadScene(0); //Main Menu
         } 
         if(Input.GetKeyDown(KeyCode.P))
         {
             _pauseMenuPanel.SetActive(true);
             Time.timeScale = 0;
         }
+    }
+    public void ResumeGame()
+    {
+        _pauseMenuPanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void GameOver()

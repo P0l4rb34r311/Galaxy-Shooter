@@ -17,7 +17,6 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Sprite[] _liveSprites;
     private GameManager _gameManager;
-    [SerializeField]
     private GameObject _pauseMenuPanel;
 
     void Start()
@@ -69,12 +68,15 @@ public class UIManager : MonoBehaviour
 
     public void ResumeGameButton()
     {
-        Time.timeScale = 1;
-        _pauseMenuPanel.SetActive(false);
+        _gameManager.ResumeGame();
     }
 
     public void MainMenuButton()
     {
         SceneManager.LoadScene(0);
+    }
+    public void QuitButton()
+    {
+        Application.Quit();
     }
 }
