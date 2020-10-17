@@ -28,7 +28,7 @@ public class Asteroid : MonoBehaviour
         transform.Rotate(Vector3.forward * _rotateSpeed * Time.deltaTime, Space.Self);
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, 0, 0), transform.position.y, 0);
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
-        // Code added to start  asteroid off screen and loop through on a fixed y axis til the player shoots it.
+        // Code added to loop asteroid through on a fixed y axis til the player shoots it.
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
