@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(0); //Main Menu
         } 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) && _isGameOver == false)
         {
             PauseMenu();
         }
