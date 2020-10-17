@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
+        Time.timeScale = 1;
+        _pauseSounds = AudioListener.volume = 1;
     }
 
     void Update()
@@ -32,13 +33,13 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             PauseMenu();
-
         }
     }
     public void ResumeGame()
     {
         _pauseMenu.SetActive(false);
         Time.timeScale = 1;
+        _pauseSounds = AudioListener.volume = 1;
     }
 
     public void GameOver()
