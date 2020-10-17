@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private UIManager _uiManager;
     [SerializeField]
     private Animator _animator;
+    public static float _pauseSounds;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             PauseMenu();
+
         }
     }
     public void ResumeGame()
@@ -49,12 +51,15 @@ public class GameManager : MonoBehaviour
         {
             _pauseMenu.SetActive(false);
             Time.timeScale = 1;
+            _pauseSounds = AudioListener.volume = 1;
         }
         else
         {
             _pauseMenu.SetActive(true);
             _animator.SetBool("Pause", true);
             Time.timeScale = 0;
+            _pauseSounds = AudioListener.volume = 0;
+
         }
     }
 }
