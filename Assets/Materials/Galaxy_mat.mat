@@ -64,11 +64,11 @@ Material:
     - _DetailNormalMapScale: 1
     - _Distfading: 68
     - _DstBlend: 0
-    - _Formuparam: 575.2
+    - _Formuparam: 300
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Iterations: 30
+    - _Iterations: 12.3
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -77,10 +77,10 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StepSize: 148.7
+    - _StepSize: 150
     - _Tile: 700
     - _UVSec: 0
-    - _Volsteps: 20
+    - _Volsteps: 40
     - _ZWrite: 1
     - _Zoom: 800
     m_Colors:
@@ -88,5 +88,5 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Rotation: {r: 35, g: 25, b: 75, a: 0.1}
-    - _Scroll: {r: 0, g: 1, b: 0.6, a: 0.05}
+    - _Scroll: {r: 0, g: 1.5, b: 0.6, a: 0.05}
   m_BuildTextureStacks: []
