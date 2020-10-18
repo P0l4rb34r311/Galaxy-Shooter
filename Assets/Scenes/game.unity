@@ -1405,6 +1405,7 @@ MonoBehaviour:
   _shieldVisualizer: {fileID: 271988653}
   _rightWingDamage: {fileID: 1600134917}
   _leftWingDamage: {fileID: 1747353112}
+  _thrusters: {fileID: 321448209}
   _laserSound: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
 --- !u!212 &974663391
 SpriteRenderer:

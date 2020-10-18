@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
+using TMPro;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -30,6 +32,8 @@ public class Player : MonoBehaviour
     private GameObject _rightWingDamage;
     [SerializeField]
     private GameObject _leftWingDamage;
+    [SerializeField]
+    private GameObject _thrusters;
     private SpawnManager _spawnManager;
     private UIManager _uIManager;
     [SerializeField]
@@ -69,7 +73,7 @@ public class Player : MonoBehaviour
         {
             FiringMechanism();
         }
-
+        Thrusters();
     }
 
     void CalculateMovement()
@@ -178,5 +182,20 @@ public class Player : MonoBehaviour
     {
         _score += points;
         _uIManager.UpdateScore(_score);
+    }
+    private void Thrusters()
+    {
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _thrusters.SetActive(true);
+            _speed *= 1.5f;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _thrusters.SetActive(false);
+            _speed /= 1.5f;
+        }
+
     }
 }
