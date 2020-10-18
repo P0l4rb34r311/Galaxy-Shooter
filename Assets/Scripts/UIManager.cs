@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text _scoreText;
     [SerializeField]
+    private Text _bestScoreText;
+    [SerializeField]
     private Text _gameOverText;
     [SerializeField]
     private Text _restartText;
@@ -18,10 +20,14 @@ public class UIManager : MonoBehaviour
     private Sprite[] _liveSprites;
     private GameManager _gameManager;
     private GameObject _pauseMenuPanel;
+    private int _score;
+    private int _bestScore;
 
     void Start()
     {
-        _scoreText.text = "Score : " + 0;
+        _scoreText.text = "Score: " + 0;
+        _bestScore = PlayerPrefs.GetInt("HighScore", 0);
+        _bestScoreText.text = "Best: " + _bestScore;
         _gameOverText.gameObject.SetActive(false);
         _restartText.gameObject.SetActive(false);
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
@@ -35,6 +41,17 @@ public class UIManager : MonoBehaviour
     public void UpdateScore(int playerScore)
     {
         _scoreText.text = "Score: " + playerScore.ToString();
+        _score = playerScore;
+
+    }
+    public void CheckForBestScore()
+    {
+        if (_score > _bestScore)
+        {
+            _bestScore = _score;
+            PlayerPrefs.SetInt("HighScore", _bestScore);
+            _bestScoreText.text = "Best: " + _bestScore;
+        }
     }
 
     public void UpdateLives(int currentLives)
@@ -48,6 +65,7 @@ public class UIManager : MonoBehaviour
 
     void GameOverSequence()
     {
+        CheckForBestScore();
         _gameManager.GameOver();
         _gameOverText.gameObject.SetActive(true);
         _restartText.gameObject.SetActive(true);
