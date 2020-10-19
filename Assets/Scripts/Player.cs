@@ -186,6 +186,8 @@ public class Player : MonoBehaviour
     {
         _isShieldsActive = true;
         _shieldVisualizer.SetActive(true);
+        _shields = 3;
+        _sprite.color = new Color(1, 1, 1, 1);
     }
 
     public void AddScore(int points)
@@ -210,20 +212,15 @@ public class Player : MonoBehaviour
     }
     private void Shields()
     {
-        if (_shields == 3)
-        {
-            _sprite.color = new Color(1, 1, 1, 1);
-            Debug.Log("Full");
-        }
         if (_shields == 2)
         {
             _sprite.color = new Color(1, 0.4442f, 0, 1);
-            Debug.Log("Half");
+
         }
         if (_shields == 1)
         {
             _sprite.color = new Color(1, 0, 0, 1);
-            Debug.Log("Low");
+
         }
         if (_shields < 1)
         {
