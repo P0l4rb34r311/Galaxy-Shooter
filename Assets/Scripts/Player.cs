@@ -18,9 +18,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _lives = 3f;
     [SerializeField]
+    private float _shields = 3f;
+    [SerializeField]
     private int _score = 0;
     [SerializeField]
-    private float _shields = 3f;
+    private int _ammo = 15;
     private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
     private bool _isShieldsActive = false;
@@ -81,6 +83,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
             FiringMechanism();
+
         }
         Thrusters();
         _uIManager.ResetBest(); //developer only
@@ -107,14 +110,18 @@ public class Player : MonoBehaviour
 
     void FiringMechanism()
     {
-        _canFire = Time.time + _fireRate;
-        if (_isTripleShotActive == true)
+        if (_ammo != 0)
         {
-            Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
-        }
-        else
-        {
-            Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f,  0), Quaternion.identity);
+            _canFire = Time.time + _fireRate;
+            _ammo--;
+            if (_isTripleShotActive == true)
+            {
+                Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
+            }
         }
         _audioSource.Play();
     }
@@ -146,6 +153,13 @@ public class Player : MonoBehaviour
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
         }
+    }
+    public void AddScore(int points)
+    {
+        _score += points;
+        _uIManager.UpdateScore(_score);
+        _uIManager.CheckForBestScore();
+
     }
 
     public void TripleShotActive()
@@ -189,13 +203,7 @@ public class Player : MonoBehaviour
         _sprite.color = new Color(1, 1, 1, 1);
     }
 
-    public void AddScore(int points)
-    {
-        _score += points;
-        _uIManager.UpdateScore(_score);
-        _uIManager.CheckForBestScore();
 
-    }
     private void Thrusters()
     {
 
@@ -229,6 +237,10 @@ public class Player : MonoBehaviour
             _shieldVisualizer.SetActive(false);
         }
 
+    }
+    public void AmmoCollected()
+    {
+        _ammo = 15;
     }
 
 }
