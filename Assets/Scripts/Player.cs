@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     private float _lives = 3f;
     [SerializeField]
     private int _score = 0;
+    [SerializeField]
+    private float _shields = 3f;
     private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
     private bool _isShieldsActive = false;
@@ -39,6 +41,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private AudioClip _laserSound;
     private AudioSource _audioSource;
+    private SpriteRenderer _sprite;
+
 
 
     void Start()
@@ -47,12 +51,17 @@ public class Player : MonoBehaviour
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
-        
-        if(_spawnManager == null)
+        _sprite = _shieldVisualizer.GetComponent<SpriteRenderer>();
+
+        if (_sprite == null)
+        {
+            Debug.LogError("ShieldViz is null");
+        }
+        if (_spawnManager == null)
         {
             Debug.LogError("Spawn Manager is NULL");
         }
-        if(_uIManager == null)
+        if (_uIManager == null)
         {
             Debug.LogError("UI Manager is NULL");
         }
@@ -111,14 +120,15 @@ public class Player : MonoBehaviour
 
     public void Damage(float damage)
     {
+        if (_isShieldsActive == true)
+        {
+            _shields -= damage;
+            Shields();
+            return;
+        }
+
         _lives -= damage;
         int _livesInt = (int)_lives;
-        if(_isShieldsActive == true)
-        {
-            _isShieldsActive = false;
-            _shieldVisualizer.SetActive(false);
-            return;
-        }             
         if(_livesInt == 2)
         {
             _rightWingDamage.SetActive(true);
@@ -195,6 +205,30 @@ public class Player : MonoBehaviour
         {
             _thrusters.SetActive(false);
             _speed /= 1.5f;
+        }
+
+    }
+    private void Shields()
+    {
+        if (_shields == 3)
+        {
+            _sprite.color = new Color(1, 1, 1, 1);
+            Debug.Log("Full");
+        }
+        if (_shields == 2)
+        {
+            _sprite.color = new Color(1, 0.4442f, 0, 1);
+            Debug.Log("Half");
+        }
+        if (_shields == 1)
+        {
+            _sprite.color = new Color(1, 0, 0, 1);
+            Debug.Log("Low");
+        }
+        if (_shields < 1)
+        {
+            _isShieldsActive = false;
+            _shieldVisualizer.SetActive(false);
         }
 
     }
