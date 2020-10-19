@@ -83,6 +83,7 @@ public class Player : MonoBehaviour
             FiringMechanism();
         }
         Thrusters();
+        _uIManager.ResetBest(); //developer only
     }
 
     void CalculateMovement()
@@ -123,7 +124,7 @@ public class Player : MonoBehaviour
         if (_isShieldsActive == true)
         {
             _shields -= damage;
-            Shields();
+            ShieldStrength();
             return;
         }
 
@@ -161,8 +162,6 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(4f);
             _isTripleShotActive = false;
         }
-        
-        
     }
 
     public void SpeedBoostActive()
@@ -194,6 +193,8 @@ public class Player : MonoBehaviour
     {
         _score += points;
         _uIManager.UpdateScore(_score);
+        _uIManager.CheckForBestScore();
+
     }
     private void Thrusters()
     {
@@ -210,7 +211,7 @@ public class Player : MonoBehaviour
         }
 
     }
-    private void Shields()
+    private void ShieldStrength()
     {
         if (_shields == 2)
         {
@@ -229,4 +230,5 @@ public class Player : MonoBehaviour
         }
 
     }
+
 }

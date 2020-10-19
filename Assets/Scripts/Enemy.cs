@@ -68,12 +68,11 @@ public class Enemy : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Player player = other.transform.GetComponent<Player>();
             
-            if (player != null)
+            if (_player != null)
             {
-                player.Damage(1f);
-                player.AddScore(10);
+                _player.Damage(1f);
+                _player.AddScore(10);
             }
             //_speed = 0;
             _animator.SetTrigger("OnEnemyDeath");

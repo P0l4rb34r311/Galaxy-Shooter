@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     private GameObject _pauseMenuPanel;
     private int _score;
     private int _bestScore;
+    [SerializeField]
+    private bool _resetBest = false; //reset best score
 
     void Start()
     {
@@ -53,6 +55,13 @@ public class UIManager : MonoBehaviour
             _bestScoreText.text = "Best: " + _bestScore;
         }
     }
+    public void ResetBest() //Debug for dev
+    {
+        if (_resetBest == true)
+        {
+            _bestScore = 0;
+        }
+    }
 
     public void UpdateLives(int currentLives)
     {
@@ -65,6 +74,7 @@ public class UIManager : MonoBehaviour
 
     void GameOverSequence()
     {
+        //UpdateScore(_score);
         CheckForBestScore();
         _gameManager.GameOver();
         _gameOverText.gameObject.SetActive(true);
