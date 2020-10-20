@@ -6,6 +6,7 @@ using TMPro;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -22,7 +23,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _score = 0;
     [SerializeField]
-    private int _ammo = 15;
+    private int _ammo;
+    [SerializeField]
+    private int _maxAmmo = 15;
     private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
     private bool _isShieldsActive = false;
@@ -44,6 +47,8 @@ public class Player : MonoBehaviour
     private AudioClip _laserSound;
     private AudioSource _audioSource;
     private SpriteRenderer _sprite;
+    [SerializeField]
+    private AmmoBar _ammoBar;
 
 
 
@@ -54,7 +59,14 @@ public class Player : MonoBehaviour
         _uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
         _sprite = _shieldVisualizer.GetComponent<SpriteRenderer>();
+        _ammoBar = GameObject.Find("AmmoSldr").GetComponent<AmmoBar>();
+        _ammo = _maxAmmo;
+        _ammoBar.SetMaxAmmo(_maxAmmo);
 
+        if (_ammoBar == null)
+        {
+            Debug.LogError("Ammo Bar is NULL");
+        }
         if (_sprite == null)
         {
             Debug.LogError("ShieldViz is null");
@@ -83,6 +95,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
             FiringMechanism();
+            
 
         }
         Thrusters();
@@ -114,6 +127,7 @@ public class Player : MonoBehaviour
         {
             _canFire = Time.time + _fireRate;
             _ammo--;
+            _ammoBar.SetAmmo(_ammo);
             if (_isTripleShotActive == true)
             {
                 Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
@@ -122,8 +136,9 @@ public class Player : MonoBehaviour
             {
                 Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
             }
+            _audioSource.Play();
         }
-        _audioSource.Play();
+
     }
 
     public void Damage(float damage)
@@ -241,6 +256,7 @@ public class Player : MonoBehaviour
     public void AmmoCollected()
     {
         _ammo = 15;
+        _ammoBar.SetAmmo(_ammo);
     }
 
 }

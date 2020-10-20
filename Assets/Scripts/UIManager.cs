@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     private GameManager _gameManager;
     private GameObject _pauseMenuPanel;
     private int _score;
+    [SerializeField]
     private int _bestScore;
     [SerializeField]
     private bool _resetBest = false; //reset best score
@@ -33,12 +34,14 @@ public class UIManager : MonoBehaviour
         _gameOverText.gameObject.SetActive(false);
         _restartText.gameObject.SetActive(false);
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
-        
-        if(_gameManager == null)
+
+
+        if (_gameManager == null)
         {
             Debug.LogError("GameManager is NULL");
         }
     }
+
 
     public void UpdateScore(int playerScore)
     {
