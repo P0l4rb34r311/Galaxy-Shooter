@@ -49,6 +49,8 @@ public class Player : MonoBehaviour
     private SpriteRenderer _sprite;
     [SerializeField]
     private AmmoBar _ammoBar;
+    [SerializeField]
+    private GameObject _cameraShake;
 
 
 
@@ -95,10 +97,9 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
             FiringMechanism();
-            
-
         }
-        Thrusters();
+        ThrustersActive();
+        StartCoroutine(CameraShakeStop());
         _uIManager.ResetBest(); //developer only
     }
 
@@ -151,6 +152,10 @@ public class Player : MonoBehaviour
         }
 
         _lives -= damage;
+        if (_cameraShake.activeSelf == false)
+        {
+            _cameraShake.SetActive(true);
+        }
         int _livesInt = (int)_lives;
         if(_livesInt == 2)
         {
@@ -169,6 +174,15 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    IEnumerator CameraShakeStop()
+    {
+        while (_cameraShake.activeSelf == true)
+        {
+            yield return new WaitForSeconds(1f);
+            _cameraShake.SetActive(false);
+        }
+    }
+
     public void AddScore(int points)
     {
         _score += points;
@@ -176,7 +190,11 @@ public class Player : MonoBehaviour
         _uIManager.CheckForBestScore();
 
     }
-
+    public void AmmoCollected()
+    {
+        _ammo = 15;
+        _ammoBar.SetAmmo(_ammo);
+    }
     public void TripleShotActive()
     {
         _isTripleShotActive = true;
@@ -218,22 +236,6 @@ public class Player : MonoBehaviour
         _sprite.color = new Color(1, 1, 1, 1);
     }
 
-
-    private void Thrusters()
-    {
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            _thrusters.SetActive(true);
-            _speed *= 1.5f;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            _thrusters.SetActive(false);
-            _speed /= 1.5f;
-        }
-
-    }
     private void ShieldStrength()
     {
         if (_shields == 2)
@@ -253,10 +255,23 @@ public class Player : MonoBehaviour
         }
 
     }
-    public void AmmoCollected()
+
+    private void ThrustersActive()
     {
-        _ammo = 15;
-        _ammoBar.SetAmmo(_ammo);
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _thrusters.SetActive(true);
+            _speed *= 1.5f;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _thrusters.SetActive(false);
+            _speed /= 1.5f;
+        }
+
     }
+
+
 
 }
