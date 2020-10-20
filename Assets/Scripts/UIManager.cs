@@ -77,7 +77,6 @@ public class UIManager : MonoBehaviour
 
     void GameOverSequence()
     {
-        //UpdateScore(_score);
         CheckForBestScore();
         _gameManager.GameOver();
         _gameOverText.gameObject.SetActive(true);

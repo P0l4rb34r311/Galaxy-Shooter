@@ -46,6 +46,9 @@ public class Powerup : MonoBehaviour
                     case 3:
                         player.AmmoCollected();
                         break;
+                    case 4:
+                        player.LivesCollected();
+                        break;
                     default:
                         Debug.Log("default");
                         break;

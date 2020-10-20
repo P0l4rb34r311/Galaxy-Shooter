@@ -17,13 +17,14 @@ public class Player : MonoBehaviour
     private float _fireRate = 0.5f;
     private float _canFire = -1f;
     [SerializeField]
-    private float _lives = 3f;
+    private int _lives;
     [SerializeField]
     private float _shields = 3f;
     [SerializeField]
     private int _score = 0;
     [SerializeField]
     private int _ammo;
+    private float _livesFloat = 3f;
     [SerializeField]
     private int _maxAmmo = 15;
     private bool _isTripleShotActive = false;
@@ -64,6 +65,7 @@ public class Player : MonoBehaviour
         _ammoBar = GameObject.Find("AmmoSldr").GetComponent<AmmoBar>();
         _ammo = _maxAmmo;
         _ammoBar.SetMaxAmmo(_maxAmmo);
+        //_lives = Mathf.Clamp(_lives, 0, 3);
 
         if (_ammoBar == null)
         {
@@ -101,6 +103,12 @@ public class Player : MonoBehaviour
         ThrustersActive();
         StartCoroutine(CameraShakeStop());
         _uIManager.ResetBest(); //developer only
+    }
+
+    public void UpdateLives(int value)
+    {
+        _lives = value;
+        _uIManager.UpdateLives(_lives);
     }
 
     void CalculateMovement()
@@ -151,28 +159,30 @@ public class Player : MonoBehaviour
             return;
         }
 
-        _lives -= damage;
+        _livesFloat -= damage;
+
         if (_cameraShake.activeSelf == false)
         {
             _cameraShake.SetActive(true);
         }
-        int _livesInt = (int)_lives;
-        if(_livesInt == 2)
+
+        _lives = (int)_livesFloat;
+
+        if(_lives == 2)
         {
             _rightWingDamage.SetActive(true);
         }
-        else if(_livesInt == 1)
+        else if(_lives == 1)
         {
             _leftWingDamage.SetActive(true);
         }
 
-        _uIManager.UpdateLives(_livesInt);
-
-        if(_livesInt < 1)
+        if(_lives == 0)
         {
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
         }
+        UpdateLives(_lives);
     }
     IEnumerator CameraShakeStop()
     {
@@ -195,9 +205,33 @@ public class Player : MonoBehaviour
         _ammo = 15;
         _ammoBar.SetAmmo(_ammo);
     }
+
+    public void LivesCollected()
+    {
+        if (_lives >= 3)
+        {
+            return;
+        }
+        else
+        {
+            _livesFloat += 1;
+            _lives = (int)_livesFloat;
+        }
+        if (_lives > 2)
+        {
+            _rightWingDamage.SetActive(false);
+        }
+        if (_lives > 1)
+        {
+            _leftWingDamage.SetActive(false);
+        }
+        UpdateLives(_lives);
+    }
     public void TripleShotActive()
     {
         _isTripleShotActive = true;
+        _ammo += 5;
+        _ammoBar.SetAmmo(_ammo);
         StartCoroutine(TripleShotPowerDownRoutine());
     }
 
@@ -248,7 +282,7 @@ public class Player : MonoBehaviour
             _sprite.color = new Color(1, 0, 0, 1);
 
         }
-        if (_shields < 1)
+        if (_shields == 0)
         {
             _isShieldsActive = false;
             _shieldVisualizer.SetActive(false);
