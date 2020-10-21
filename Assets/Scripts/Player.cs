@@ -17,14 +17,19 @@ public class Player : MonoBehaviour
     private float _fireRate = 0.5f;
     private float _canFire = -1f;
     [SerializeField]
-    private int _lives;
-    [SerializeField]
     private float _shields = 3f;
+    [SerializeField]
+    private float _charge;
+    private float _chargeMax = 100;
+    private float _livesFloat = 3f;
+    [SerializeField]
+    private float _useRate = 30f;
+    [SerializeField]
+    private int _lives;
     [SerializeField]
     private int _score = 0;
     [SerializeField]
     private int _ammo;
-    private float _livesFloat = 3f;
     [SerializeField]
     private int _maxAmmo = 15;
     private bool _isTripleShotActive = false;
@@ -42,6 +47,8 @@ public class Player : MonoBehaviour
     private GameObject _leftWingDamage;
     [SerializeField]
     private GameObject _thrusters;
+    [SerializeField]
+    private GameObject _cameraShake;
     private SpawnManager _spawnManager;
     private UIManager _uIManager;
     [SerializeField]
@@ -50,8 +57,10 @@ public class Player : MonoBehaviour
     private SpriteRenderer _sprite;
     [SerializeField]
     private AmmoBar _ammoBar;
-    [SerializeField]
-    private GameObject _cameraShake;
+    private ThrustersBar _thrustersBar;
+    private IEnumerator _thrusterRegen;
+    private IEnumerator _thrusterUse;
+
 
 
 
@@ -65,8 +74,16 @@ public class Player : MonoBehaviour
         _ammoBar = GameObject.Find("AmmoSldr").GetComponent<AmmoBar>();
         _ammo = _maxAmmo;
         _ammoBar.SetMaxAmmo(_maxAmmo);
-        //_lives = Mathf.Clamp(_lives, 0, 3);
+        _thrustersBar = GameObject.Find("ThrusterSldr").GetComponent<ThrustersBar>();
+        _charge = _chargeMax;
+        _thrustersBar.SetThrustersMax(_chargeMax);
+        _thrusterRegen = ThrusterRegen();
+        _thrusterUse = ThrusterUse();
 
+        if (_thrustersBar == null)
+        {
+            Debug.LogError("Thruster Bar is NULL");
+        }
         if (_ammoBar == null)
         {
             Debug.LogError("Ammo Bar is NULL");
@@ -96,12 +113,19 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateMovement();
+        StartCoroutine(CameraShakeStop());
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
             FiringMechanism();
         }
-        ThrustersActive();
-        StartCoroutine(CameraShakeStop());
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            ThrustersActive();
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            ThrustersInactive();
+        }
         _uIManager.ResetBest(); //developer only
     }
 
@@ -292,20 +316,48 @@ public class Player : MonoBehaviour
 
     private void ThrustersActive()
     {
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            _thrusters.SetActive(true);
-            _speed *= 1.5f;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            _thrusters.SetActive(false);
-            _speed /= 1.5f;
-        }
+        _thrusters.SetActive(true);
+        _speed *= 1.5f;
+        StopCoroutine("ThrusterRegen");
+        StartCoroutine("ThrusterUse");
 
     }
 
+    private void ThrustersInactive()
+    {       
+        _thrusters.SetActive(false);
+        _speed = 5.5f;
+        StopCoroutine("ThrusterUse");
+        StartCoroutine("ThrusterRegen");
 
 
+    }
+    IEnumerator ThrusterRegen()
+    {
+        yield return new WaitForSeconds(0.1f);
+        while (_charge < _chargeMax)
+        {
+            _charge += _chargeMax / 100;
+            _thrustersBar.SetThrusters(_charge);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+    }
+    IEnumerator ThrusterUse()
+    {
+        yield return new WaitForSeconds(0.1f);
+        while (_charge > 0)
+        {
+            _charge -= _useRate * Time.deltaTime;
+            if (_charge <= 0)
+            {
+                _speed /= 1.5f;
+                _thrusters.SetActive(false);
+                _charge = 0;
+            }
+            _thrustersBar.SetThrusters(_charge);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+    }
 }
