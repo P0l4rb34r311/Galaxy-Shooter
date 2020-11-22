@@ -65,3 +65,12 @@ The following packages were added:
   com.unity.analytics@3.3.5
   com.unity.purchasing@2.1.0
   com.unity.xr.legacyinputhelpers@2.1.4
+
+=== Mon Nov 16 11:33:17 2020
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.ads from version 3.4.9 to 3.5.0
+  com.unity.analytics from version 3.3.5 to 3.5.3

@@ -68,13 +68,11 @@ public class Enemy : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            
             if (_player != null)
             {
                 _player.Damage(1f);
                 _player.AddScore(10);
             }
-            //_speed = 0;
             _animator.SetTrigger("OnEnemyDeath");
             _audioSource.Play();
             Destroy(GetComponent<Collider2D>());
@@ -87,7 +85,17 @@ public class Enemy : MonoBehaviour
             {
                 _player.AddScore(10);
             }
-            //_speed = 0;
+            _animator.SetTrigger("OnEnemyDeath");
+            _audioSource.Play();
+            Destroy(GetComponent<Collider2D>());
+            Destroy(this.gameObject, 2.9f);
+        }
+        if (other.tag == "LaserCanon")
+        {
+            if (_player != null)
+            {
+                _player.AddScore(10);
+            }
             _animator.SetTrigger("OnEnemyDeath");
             _audioSource.Play();
             Destroy(GetComponent<Collider2D>());

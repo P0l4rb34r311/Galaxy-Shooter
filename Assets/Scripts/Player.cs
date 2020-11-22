@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
     private bool _isShieldsActive = false;
+    private bool _isLaserCanonActive = false;
     [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
@@ -49,6 +50,8 @@ public class Player : MonoBehaviour
     private GameObject _thrusters;
     [SerializeField]
     private GameObject _cameraShake;
+    [SerializeField]
+    private GameObject _laserCanon;
     private SpawnManager _spawnManager;
     private UIManager _uIManager;
     [SerializeField]
@@ -79,6 +82,7 @@ public class Player : MonoBehaviour
         _thrustersBar.SetThrustersMax(_chargeMax);
         _thrusterRegen = ThrusterRegen();
         _thrusterUse = ThrusterUse();
+        
 
         if (_thrustersBar == null)
         {
@@ -114,7 +118,7 @@ public class Player : MonoBehaviour
     {
         CalculateMovement();
         StartCoroutine(CameraShakeStop());
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire && _laserCanon.activeSelf == false)
         {
             FiringMechanism();
         }
@@ -266,6 +270,23 @@ public class Player : MonoBehaviour
         {
             yield return new WaitForSeconds(4f);
             _isTripleShotActive = false;
+        }
+    }
+
+    public void LaserCanon()
+    {
+        _isLaserCanonActive = true;
+        _laserCanon.SetActive(true);
+        StartCoroutine(LaserCanonPowerDownRoutine());
+    }
+
+    IEnumerator LaserCanonPowerDownRoutine()
+    {
+        while (_isLaserCanonActive == true)
+        {
+            yield return new WaitForSeconds(6f);
+            _laserCanon.SetActive(false);
+            _isLaserCanonActive = false;
         }
     }
 

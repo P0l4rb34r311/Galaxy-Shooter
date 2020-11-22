@@ -7,7 +7,7 @@ public class Powerup : MonoBehaviour
     [SerializeField]
     private float _speed = 3f;
 
-    [SerializeField] // 0 = TripleShot, 1 = Speed, 2 = Shield 
+    [SerializeField] 
     private int _powerupID;
     [SerializeField]
     private GameObject _sound;
@@ -48,6 +48,9 @@ public class Powerup : MonoBehaviour
                         break;
                     case 4:
                         player.LivesCollected();
+                        break;
+                    case 5:
+                        player.LaserCanon();
                         break;
                     default:
                         Debug.Log("default");

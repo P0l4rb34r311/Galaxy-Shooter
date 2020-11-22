@@ -309,8 +309,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5.5
   _fireRate: 0.15
-  _lives: 3
   _shields: 3
+  _charge: 0
+  _useRate: 30
+  _lives: 3
   _score: 0
   _ammo: 15
   _maxAmmo: 15
@@ -320,9 +322,9 @@ MonoBehaviour:
   _rightWingDamage: {fileID: 554079057932854043}
   _leftWingDamage: {fileID: 554079057215767046}
   _thrusters: {fileID: 554079059212686607}
+  _cameraShake: {fileID: 0}
   _laserSound: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _ammoBar: {fileID: 0}
-  _cameraShake: {fileID: 0}
 --- !u!82 &554079058525819644
 AudioSource:
   m_ObjectHideFlags: 0
