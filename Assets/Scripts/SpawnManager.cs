@@ -35,7 +35,7 @@ public class SpawnManager : MonoBehaviour
         while (_stopSpawning == false)
         {
             Vector3 posToSpawn = new Vector3(Random.Range(-9.5f, 9.5f), 8, 0);
-            if (Random.value > 0.3)
+            if (Random.value > 0.1)
             {
                 Instantiate(_powerups[Random.Range(0,4)], posToSpawn, Quaternion.identity);
             }
