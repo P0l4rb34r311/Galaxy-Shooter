@@ -74,3 +74,15 @@ Update Mode: updateDependencies
 The following packages were updated:
   com.unity.ads from version 3.4.9 to 3.5.0
   com.unity.analytics from version 3.3.5 to 3.5.3
+
+=== Thu Dec  3 10:43:08 2020
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.ads from version 3.5.0 to 3.5.2
+  com.unity.ide.visualstudio from version 2.0.3 to 2.0.5
+  com.unity.shadergraph from version 8.2.0 to 8.3.1
+  com.unity.test-framework from version 1.1.18 to 1.1.19
+  com.unity.xr.legacyinputhelpers from version 2.1.4 to 2.1.6
