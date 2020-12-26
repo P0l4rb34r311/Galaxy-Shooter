@@ -11,7 +11,7 @@ using UnityEngine.UIElements;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 3.5f; 
+    private float _speed = 5.5f; 
     private float _speedMultiplyer = 2f;
     [SerializeField]
     private float _fireRate = 0.5f;
@@ -316,7 +316,7 @@ public class Player : MonoBehaviour
         while(_isSpeedBoostActive == true)
         {
             yield return new WaitForSeconds(4f);
-            _speed /= _speedMultiplyer;
+            _speed = 5.5f;
             _isSpeedBoostActive = false;
         }
     }
@@ -386,7 +386,7 @@ public class Player : MonoBehaviour
             _charge -= _useRate * Time.deltaTime;
             if (_charge <= 0)
             {
-                _speed /= 1.5f;
+                _speed = 5.5f;
                 _thrusters.SetActive(false);
                 _charge = 0;
             }
