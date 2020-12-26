@@ -11,7 +11,7 @@ using UnityEngine.UIElements;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 3.5f; 
+    private float _speed = 5.5f; 
     private float _speedMultiplyer = 2f;
     [SerializeField]
     private float _fireRate = 0.5f;
@@ -56,6 +56,8 @@ public class Player : MonoBehaviour
     private UIManager _uIManager;
     [SerializeField]
     private AudioClip _laserSound;
+    [SerializeField]
+    private AudioClip _noAmmoSound;
     private AudioSource _audioSource;
     private SpriteRenderer _sprite;
     [SerializeField]
@@ -130,6 +132,14 @@ public class Player : MonoBehaviour
         {
             ThrustersInactive();
         }
+        if (_ammo < 1)
+        {
+            _uIManager.NoAmmoPulse(true);
+        }
+        else
+        {
+            _uIManager.NoAmmoPulse(false);
+        }
         _uIManager.ResetBest(); //developer only
     }
 
@@ -173,6 +183,11 @@ public class Player : MonoBehaviour
             {
                 Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
             }
+            _audioSource.Play();
+        }
+        if (_ammo == 0)
+        {
+            _audioSource.clip = _noAmmoSound;
             _audioSource.Play();
         }
 
@@ -233,7 +248,6 @@ public class Player : MonoBehaviour
         _ammo = 15;
         _ammoBar.SetAmmo(_ammo);
     }
-
     public void LivesCollected()
     {
         if (_lives >= 3)
@@ -302,7 +316,7 @@ public class Player : MonoBehaviour
         while(_isSpeedBoostActive == true)
         {
             yield return new WaitForSeconds(4f);
-            _speed /= _speedMultiplyer;
+            _speed = 5.5f;
             _isSpeedBoostActive = false;
         }
     }
@@ -372,7 +386,7 @@ public class Player : MonoBehaviour
             _charge -= _useRate * Time.deltaTime;
             if (_charge <= 0)
             {
-                _speed /= 1.5f;
+                _speed = 5.5f;
                 _thrusters.SetActive(false);
                 _charge = 0;
             }

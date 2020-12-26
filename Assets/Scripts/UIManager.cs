@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    private Player _player;
     [SerializeField]
     private Text _scoreText;
     [SerializeField]
@@ -19,6 +20,12 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Sprite[] _liveSprites;
     private GameManager _gameManager;
+    [SerializeField]
+    private GameObject _ammoSlider;
+    [SerializeField]
+    private GameObject _thrusterSlider;
+    [SerializeField]
+    private GameObject _noAmmoPulse;
     private GameObject _pauseMenuPanel;
     private int _score;
     [SerializeField]
@@ -28,11 +35,13 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        _player = GameObject.Find("Player").GetComponent<Player>();
         _scoreText.text = "Score: " + 0;
         _bestScore = PlayerPrefs.GetInt("HighScore", 0);
         _bestScoreText.text = "Best: " + _bestScore;
         _gameOverText.gameObject.SetActive(false);
         _restartText.gameObject.SetActive(false);
+        _noAmmoPulse.gameObject.SetActive(false);
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
 
 
@@ -95,6 +104,18 @@ public class UIManager : MonoBehaviour
         }
 
     }
+    public void NoAmmoPulse(bool active)
+    {
+        if (active == true)
+        {
+            _noAmmoPulse.SetActive(true);
+        }
+        else
+        {
+            _noAmmoPulse.SetActive(false);
+        }
+    }
+
 
     public void ResumeGameButton()
     {
