@@ -141,6 +141,7 @@ public class Player : MonoBehaviour
             _uIManager.NoAmmoPulse(false);
         }
         _uIManager.ResetBest(); //developer only
+        _uIManager.AmmoCount(_ammo);
     }
 
     public void UpdateLives(int value)
@@ -247,6 +248,7 @@ public class Player : MonoBehaviour
     {
         _ammo = 15;
         _ammoBar.SetAmmo(_ammo);
+
     }
     public void LivesCollected()
     {

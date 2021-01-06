@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text _restartText;
     [SerializeField]
+    private Text _ammoText;
+    [SerializeField]
     private Image _livesImg;
     [SerializeField]
     private Sprite[] _liveSprites;
@@ -30,6 +32,7 @@ public class UIManager : MonoBehaviour
     private int _score;
     [SerializeField]
     private int _bestScore;
+    private int _ammoCount;
     [SerializeField]
     private bool _resetBest = false; //reset best score
 
@@ -39,6 +42,7 @@ public class UIManager : MonoBehaviour
         _scoreText.text = "Score: " + 0;
         _bestScore = PlayerPrefs.GetInt("HighScore", 0);
         _bestScoreText.text = "Best: " + _bestScore;
+        _ammoText.text = 15 + "/15";
         _gameOverText.gameObject.SetActive(false);
         _restartText.gameObject.SetActive(false);
         _noAmmoPulse.gameObject.SetActive(false);
@@ -51,7 +55,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
+    public void AmmoCount(int playerAmmo)
+    {
+        _ammoText.text = playerAmmo.ToString() + "/15";
+        _ammoCount = playerAmmo;
+    }
     public void UpdateScore(int playerScore)
     {
         _scoreText.text = "Score: " + playerScore.ToString();
