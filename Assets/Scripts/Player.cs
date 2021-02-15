@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
             _uIManager.NoAmmoPulse(false);
         }
         _uIManager.ResetBest(); //developer only
-        _uIManager.AmmoCount(_ammo);
+        //
     }
 
     public void UpdateLives(int value)
@@ -171,6 +171,7 @@ public class Player : MonoBehaviour
 
     void FiringMechanism()
     {
+        
         if (_ammo != 0)
         {
             _canFire = Time.time + _fireRate;
@@ -191,7 +192,7 @@ public class Player : MonoBehaviour
             _audioSource.clip = _noAmmoSound;
             _audioSource.Play();
         }
-
+        _uIManager.AmmoCount(_ammo);
     }
 
     public void Damage(float damage)
