@@ -140,8 +140,8 @@ public class Player : MonoBehaviour
         {
             _uIManager.NoAmmoPulse(false);
         }
+        _uIManager.AmmoCount(_ammo);
         _uIManager.ResetBest(); //developer only
-        //
     }
 
     public void UpdateLives(int value)
@@ -192,7 +192,7 @@ public class Player : MonoBehaviour
             _audioSource.clip = _noAmmoSound;
             _audioSource.Play();
         }
-        _uIManager.AmmoCount(_ammo);
+        
     }
 
     public void Damage(float damage)

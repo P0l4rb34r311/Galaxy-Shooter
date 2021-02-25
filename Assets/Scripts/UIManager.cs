@@ -55,11 +55,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void AmmoCount(int playerAmmo)
-    {
-        _ammoText.text = playerAmmo.ToString() + "/15";
-        _ammoCount = playerAmmo;
-    }
+
     public void UpdateScore(int playerScore)
     {
         _scoreText.text = "Score: " + playerScore.ToString();
@@ -123,7 +119,11 @@ public class UIManager : MonoBehaviour
             _noAmmoPulse.SetActive(false);
         }
     }
-
+    public void AmmoCount(int playerAmmo)
+    {
+        _ammoText.text = playerAmmo.ToString() + "/15";
+        _ammoCount = playerAmmo;
+    }
 
     public void ResumeGameButton()
     {
