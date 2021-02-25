@@ -187,12 +187,11 @@ public class Player : MonoBehaviour
             }
             _audioSource.Play();
         }
-        if (_ammo == 0)
+        if (_ammo <= 1)
         {
             _audioSource.clip = _noAmmoSound;
             _audioSource.Play();
-        }
-        
+        }        
     }
 
     public void Damage(float damage)
